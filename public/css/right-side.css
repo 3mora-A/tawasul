@@ -1,0 +1,360 @@
+/* ========================
+   RIGHT-SIDE CONTAINER
+   ======================== */
+   .right-side {
+    position: relative;        /* for absolutely-positioned children */
+    width: 280px;
+    flex-shrink: 0;
+    background-color: #1e1f2f;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  /* slide-in on tablet/mobile */
+  @media screen and (max-width: 1210px) {
+    .right-side {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 4;
+    }
+    .right-side.active {
+      transform: translateX(0);
+    }
+  }
+  
+  /* stack above main on small screens */
+  @media screen and (max-width: 768px) {
+    .main {
+      flex-direction: column;
+    }
+    .right-side {
+      order: -1;
+      width: 100%;
+      height: auto;
+      /* position: relative; */
+      /* transform: none; */
+    }
+  }
+  
+  /* ========================
+     SUGGESTED STORIES LIST
+     ======================== */
+  .stories {
+    flex: 1;                  /* take available vertical space */
+    overflow-y: auto;         /* scroll if too many items */
+  }
+  .side-wrapper {
+    padding: 30px;
+  }
+  .side-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  
+  .user {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .user + .user {
+    margin-top: 12px;
+  }
+  .user:hover {
+    background-color: rgba(255,255,255,0.05);
+  }
+  
+  .user-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    margin-right: 12px;
+    border: 2px solid transparent;
+    margin-left: 10px;
+  }
+  .stories .user-img {
+    border-color: #e2b96c;
+  }
+  
+  .username {
+    font-size: 0.95rem;
+    color: #eee;
+  }
+  .album-date {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 2px;
+  }
+  
+  /* ========================
+     SEARCH BAR (PINNED BOTTOM)
+     ======================== */
+  .search-bar.right-search {
+    /* position: absolute; */
+    left: 16px;
+    right: 16px;
+  }
+  
+earch-bar.right-search input:focus {
+    outline: none;
+    border-color: #777;
+  }
+  
+  /* ========================
+     SEARCH RESULTS DROPDOWN
+     (appears above input)
+     ======================== */
+  .search-results-box {
+    position: absolute;
+    bottom: calc(100% + 8px);   /* 8px gap above the input */
+    right: 0;
+    width: 100%;
+    background-color: #1e1b2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;              /* toggle via JS */
+  }
+  
+  /* each result link */
+  .search-results-box a {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: #f0f0f0;
+    border-bottom: 1px solid #3c3c4c;
+    transition: background-color 0.2s;
+  }
+  .search-results-box a:last-child {
+    border-bottom: none;
+  }
+  .search-results-box a:hover {
+    background-color: #2e2a45;
+  }
+  .search-results-box img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+
+
+  .account-button {
+    border: 0;
+    background: 0;
+    color: #64677a;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.account-button svg {
+    width: 20px;
+}
+
+.account-button:not(.right-side-button)+.account-button:before {
+    position: absolute;
+    right: 0px;
+    top: -2px;
+    background-color: #1b86f8;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    content: "";
+    border: 2px solid #151728;
+}
+
+.account-profile {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.account-user {
+    display: inline-flex;
+    align-items: center;
+    color: #64677a;
+    font-weight: 600;
+}
+
+.account-user span {
+    font-size: 10px;
+    font-weight: normal;
+}
+
+.account {
+    height: 60px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #151728;
+    z-index: 3;
+    flex-shrink: 0;
+}
+
+.stories {
+    border-bottom: 1px solid #272a3a;
+}
+
+
+
+.stories .album-date {
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+
+
+.side-wrapper.stories {
+  display: flex;
+  flex-direction: column;
+  height: 100%;            /* fill the parent’s height */
+  background: #1e1f2f;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Title at top */
+.side-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+/* Results area grows and scrolls */
+.search-results {
+  flex: 1;                 /* take all available vertical space */
+  overflow-y: auto;
+  margin-bottom: 16px;     /* gap to the search bar */
+}
+
+/* Each individual result */
+.search-results .result-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #f0f0f0;
+  transition: background 0.2s;
+}
+.search-results .result-item + .result-item {
+  margin-top: 8px;
+}
+.search-results .result-item:hover {
+  background: rgba(255,255,255,0.05);
+}
+.search-results .result-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+/* Search bar pinned */
+.search-bar {
+  flex-shrink: 0;          /* never shrink */
+}
+.search-bar form {
+  display: flex;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #777;
+}
+
+
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: #2e2a45;
+  color: #fff;
+  font-size: 0.9rem;
+}
+.search-bar input:focus {
+  outline: none;
+  border-color: #777;
+}
+
+
+
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-input-wrapper .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  color: #777;
+  pointer-events: none; /* icon doesn’t block clicks */
+ 
+}
+
+.search-input-wrapper .search-input {
+  width: 100%;
+  padding: 8px 12px 8px 40px; /* left-padding to make room for icon */
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #2e2a45;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.search-input-wrapper .search-input:focus {
+  outline: none;
+  border-color: #777;
+}
+
+
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Position the icon inside the input */
+.search-input-wrapper .lucide-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+
+  /* styling */
+  color: #888;               /* medium grey stroke */
+  border-radius: 50%;
+  padding: 3px;
+  pointer-events: none;      /* clicks pass through to input */
+}
+

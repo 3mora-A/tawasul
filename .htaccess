@@ -1,0 +1,19 @@
+<IfModule mod_dir.c>
+    # serve public/index.php when someone hits the site root
+    DirectoryIndex public/index.php
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 1) Redirect any direct “/public/…” URL back to “/…”
+    RewriteRule ^public/(.*)$ /$1 [R=301,L]
+
+    # 2) If the request matches an existing file or folder in public_html, serve it
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # 3) Otherwise, rewrite everything else into public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
